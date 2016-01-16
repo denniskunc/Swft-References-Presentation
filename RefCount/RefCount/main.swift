@@ -47,7 +47,7 @@ class Dependent {
 
 class Parent {
     var header = 0x1234321012343210
-    var child: Dependent?        //add weak modifier for second part of test 3
+    weak var child: Dependent?        //add weak modifier for second part of test 3
     var trailer: UInt = 0xabcdefabcdefabcd
     deinit {
         print("Parent deinit")
@@ -60,24 +60,24 @@ do {
     print("Parent Dump 1")
     print(parentDump())
     
-    //Test 2
+    //Example 1
     //Show ref count increases when object is assigned to a second pointer
     let parent2 = parent
     print("Parent Dump 2")
     print(parentDump())
     
     
-    //Test 3  without weak then with weak
-//    do {
-//    let child = Dependent(ref: parent)
-//    let childDump = dumperFunc(child)
-//    parent.child = child
-//    
-//        print("child dump 1")
-//        print(childDump())
-//        print("parent dump 3")
-//        print(parentDump())
-//    }
+    //Example 2  without weak then with weak
+    do {
+    let child = Dependent(ref: parent)
+    let childDump = dumperFunc(child)
+    parent.child = child
+    
+        print("child dump 1")
+        print(childDump())
+        print("parent dump 3")
+        print(parentDump())
+    }
     
     
 }
